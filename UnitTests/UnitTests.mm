@@ -19,29 +19,37 @@
 #define STRINGIFY(x) @#x
 #define TOSTRING(x) STRINGIFY(x)
 
-- (void)testSwiftFlagExtraction {
-    NSString *swiftKey = @"CompileSwiftSources normal x86_64 com.apple.xcode.tools.swift.compiler";
+- (void)hybridSwiftObjCTest {
+    // This test data is created off of the example project in
+    // TestData/BasiciOSExampleWithCompileCommandHook
     NSString *buildRoot = [TOSTRING(SRCROOT) stringByAppendingString:@"/UnitTests/TestData/ExampleBuildRoot8.3.2"];
     PBXTargetBuildContext *ctx = [NSClassFromString(@"PBXTargetBuildContext") new];
     NSError *e;
-    XCDependencyGraph *graph = [NSClassFromString(@"XCDependencyGraph") readFromBuildDirectory:buildRoot withTargetBuildContext:ctx error:&e];    
-    NSDictionary <NSString *, XCDependencyCommandInvocationRecord *> *records = [graph valueForKey:@"_commandInvocRecordsByIdent"];
-    XCDependencyCommandInvocationRecord *swiftCRecord = records[swiftKey];
-    NSArray *entries = EntriesForSwiftCRecord(swiftCRecord);
+    XCDependencyGraph *graph = [NSClassFromString(@"XCDependencyGraph") readFromBuildDirectory:buildRoot withTargetBuildContext:ctx error:&e];
+    NSArray *entries = CompilationDatabaseFromGraph(graph);
     
-    NSDictionary *appDelegateEntry;
+    NSDictionary *appDelegateEntry = nil;
+    NSDictionary *monsterEntry =nil;
+
     NSMutableArray *swiftEntries = [NSMutableArray array];
+    NSMutableArray *objCEntries = [NSMutableArray array];
     for (NSDictionary *entry in entries) {
         if ([entry[@"file"] hasSuffix:@".swift"]) {
             [swiftEntries addObject:entry];
+        } else if ([entry[@"file"] hasSuffix:@".m"]) {
+            [objCEntries addObject:entry];
         }
+        
         if ([entry[@"file"] hasSuffix:@"AppDelegate.swift"]) {
             appDelegateEntry = entry;
+        } else if ([entry[@"file"] hasSuffix:@"Monster.m"]) {
+            monsterEntry = entry;
         }
     }
     XCTAssertNotNil(appDelegateEntry);
+    XCTAssertNotNil(monsterEntry);
     XCTAssertEqual(swiftEntries.count, 3);
-    
+    XCTAssertEqual(objCEntries.count, 1);
 }
 
 

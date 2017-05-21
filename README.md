@@ -9,12 +9,19 @@ Database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) is a file
 format for storing compile commands.
 
 Program language tooling needs a Compilation Databases as input in order to
-setup the compiler stack; canonical uses are LibTooling and
-clang-c. I originally wrote this for
-[SwiftySwiftVim](https://github.com/jerrymarino/swiftyswiftvim), to generate
-Compilation Databases for basic Swift Xcode projects. 
+setup the compiler stack; canonical uses are LibTooling and clang-c.
 
-It currently supports Swift Commands only.
+The program is fast enough to run as part of the build pipeline. This is a
+requirement for swift projects, because, the (implicit) file dependency graph
+changes a lot.
+
+I originally wrote this for
+[SwiftySwiftVim](https://github.com/jerrymarino/swiftyswiftvim), to
+generate Compilation Databases for Swift and setup YouCompleteMe.
+
+### Features
+
+- Generate a compilation database for Swift and C compilations
 
 **Note: Tested on Xcode 8.3.1 - it uses undocumented  Xcode APIs**
 
@@ -35,9 +42,8 @@ This directory is the directory containing a `dpgh` file ( Dependency Graph )
 
 ### Create a Compilation Database for each build ( like CMake )
 
-You'll need to setup `Post Build Action` in your build.
-
-Create a `Post Build Action`, and **pass environment variables** of the target.
+Create a `Post Build Action` in build phase, a script that runs, after the
+build. Make sure to **pass the environment variables** of the target.
 
 ```
 # Run the CompilationDatabase program for builds
@@ -53,11 +59,6 @@ cleans.*
 
 ![whatisapostaction](https://cloud.githubusercontent.com/assets/1245820/26285776/0387c780-3e0b-11e7-9f9f-bb8bba12e3d8.png)
 
-
-## Future Ideas:
-
-- Support clang, so people can easily use YouCompleteMe clang completion,
-  LibTooling, and more.
 
 ## Alternatives
 

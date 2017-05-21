@@ -103,22 +103,30 @@ static NSString *SwiftFileInSwiftInvocationRecord(NSString *invocation)
     return nil;
 }
 
-extern NSArray *CompilationDatabaseFromGraph(XCDependencyGraph *graph) {
-    NSDictionary <NSString *, XCDependencyCommandInvocationRecord *> *records = [graph valueForKey:@"_commandInvocRecordsByIdent"];
-    
-    // Build a Compilation Database from the graph
-    NSMutableArray <NSDictionary *>*compDB = [NSMutableArray array];
-    for (NSString *key in records) {
-        XCDependencyCommandInvocationRecord *record = records[key];
-        if ([record.identifier hasPrefix:@"CompileSwiftSources"]) {
-            [compDB addObjectsFromArray:EntriesForSwiftCRecord(record)];
+// Xcode runs a clang for each .m/.c/.cxx
+static NSArray *EntriesForCompileCRecord(XCDependencyCommandInvocationRecord *record, NSString *workingDir) {
+    __block NSString *fileName;
+    NSArray *CLIArgs = record.commandLineArguments;
+    [CLIArgs enumerateObjectsUsingBlock:^(NSString *_Nonnull arg, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([arg isEqualToString:@"-c"]) {
+            fileName = CLIArgs[idx + 1];
+            *stop = YES;
         }
+    }];
+
+    // This is malformed, but be safe.
+    if (!fileName) {
+        return @[];
     }
-    return compDB;
+    return @[@{
+                 @"file" : fileName,
+                 @"command" : [CLIArgs componentsJoinedByString:@" "],
+                 @"directory" : workingDir
+                 }];
 }
 
 // Xcode runs SwiftC which controls swift compilation.
-NSArray* EntriesForSwiftCRecord(XCDependencyCommandInvocationRecord *record) {
+NSArray *EntriesForSwiftCRecord(XCDependencyCommandInvocationRecord *record) {
     NSMutableArray *entries = [NSMutableArray array];
     // Get the directoy from swiftInvocation
     // Usually this is last in the form of:
@@ -161,3 +169,24 @@ NSArray* EntriesForSwiftCRecord(XCDependencyCommandInvocationRecord *record) {
     }
     return entries;
 }
+
+#pragma mark - Public
+
+NSArray *CompilationDatabaseFromGraph(XCDependencyGraph *graph) {
+    NSDictionary <NSString *, XCDependencyCommandInvocationRecord *> *records = [graph valueForKey:@"_commandInvocRecordsByIdent"];
+    
+    // Build a Compilation Database from the graph
+    NSMutableArray <NSDictionary *>*compDB = [NSMutableArray array];
+    NSString *basePath = graph.basePath ?: @"";
+    for (NSString *key in records) {
+        XCDependencyCommandInvocationRecord *record = records[key];
+        if ([record.identifier hasPrefix:@"CompileSwiftSources"]) {
+            [compDB addObjectsFromArray:EntriesForSwiftCRecord(record)];
+        } else if ([record.identifier hasPrefix:@"CompileC"]) {
+            // Assume the working directoy is the `basePath` of the Xcode project.
+            [compDB addObjectsFromArray:EntriesForCompileCRecord(record, basePath)];
+        }
+    }
+    return compDB;
+}
+

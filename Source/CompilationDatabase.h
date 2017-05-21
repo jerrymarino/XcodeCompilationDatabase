@@ -8,9 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class XCDependencyCommandInvocationRecord;
 @class XCDependencyGraph;
 
-extern NSArray *EntriesForSwiftCRecord(XCDependencyCommandInvocationRecord *record);
-
-extern NSArray *CompilationDatabaseFromGraph(XCDependencyGraph *graph);
+NSArray *CompilationDatabaseFromGraph(XCDependencyGraph *graph);
