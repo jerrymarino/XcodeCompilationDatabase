@@ -4,8 +4,9 @@ This program generates a compilation database based on [Xcode's build
 graph](http://jerrymarino.com/2017/05/16/reversing-xcodes-build-graph.html).
 It simply loads the build graph writes out `compile_commands.json`.
 
-CompilationDatabase is file format for compile commands [Clang's Compilation
-Database](https://clang.llvm.org/docs/JSONCompilationDatabase.html).
+[Compilation
+Database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) is file
+format for storing compile commands.
 
 Program language tooling needs a Compilation Databases as input in order to
 setup the compiler stack. The canonical uses of Comp DB’s are LibTooling and
