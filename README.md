@@ -2,7 +2,7 @@
 
 This program generates a compilation database based on [Xcode's build
 graph](http://jerrymarino.com/2017/05/16/reversing-xcodes-build-graph.html).
-It simply loads the build graph writes out `compile_commands.json`.
+It simply loads the build graph then writes out `compile_commands.json`.
 
 [Compilation
 Database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) is file
