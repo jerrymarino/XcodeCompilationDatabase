@@ -6,6 +6,8 @@
 //  Copyright © 2017 SwiftySwiftVim. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 @class XCDependencyNode;
 @class PBXTargetBuildContext;
 

@@ -8,7 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		100878311ECBFF9900D6AEF3 /* DevToolsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 100878301ECBFF9900D6AEF3 /* DevToolsCore.framework */; };
-		10F2526C1ECC04C500B8E5F9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F2526A1ECC04C500B8E5F9 /* main.m */; };
+		1008CE4C1ED23E0100F4BE23 /* CompilationDatabase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10A3E2901ED230D800697E4A /* CompilationDatabase.mm */; };
+		10A3E2891ED22FFB00697E4A /* UnitTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10A3E2881ED22FFB00697E4A /* UnitTests.mm */; };
+		10A3E28E1ED2304800697E4A /* DevToolsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 100878301ECBFF9900D6AEF3 /* DevToolsCore.framework */; };
+		10A3E2911ED230D800697E4A /* CompilationDatabase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10A3E2901ED230D800697E4A /* CompilationDatabase.mm */; };
+		10F2526C1ECC04C500B8E5F9 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10F2526A1ECC04C500B8E5F9 /* main.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,7 +32,12 @@
 		1076BF9D1ECAA4B5002B730C /* XCCompilationDB */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XCCompilationDB; sourceTree = BUILT_PRODUCTS_DIR; };
 		1076BFA81ECAA506002B730C /* IDEFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IDEFoundation.framework; path = ../../../Applications/Xcode.app/Contents/Frameworks/IDEFoundation.framework; sourceTree = "<group>"; };
 		1076BFCD1ECAB472002B730C /* IDEKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IDEKit.framework; path = ../../../Applications/Xcode.app/Contents/Frameworks/IDEKit.framework; sourceTree = "<group>"; };
-		10F2526A1ECC04C500B8E5F9 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/main.m; sourceTree = "<group>"; };
+		10A3E2861ED22FFB00697E4A /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		10A3E2881ED22FFB00697E4A /* UnitTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = UnitTests.mm; sourceTree = "<group>"; };
+		10A3E28A1ED22FFB00697E4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		10A3E28F1ED230D800697E4A /* CompilationDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CompilationDatabase.h; path = Source/CompilationDatabase.h; sourceTree = "<group>"; };
+		10A3E2901ED230D800697E4A /* CompilationDatabase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CompilationDatabase.mm; path = Source/CompilationDatabase.mm; sourceTree = "<group>"; };
+		10F2526A1ECC04C500B8E5F9 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = Source/main.mm; sourceTree = "<group>"; };
 		10F2526B1ECC04C500B8E5F9 /* XCDependencyGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCDependencyGraph.h; path = Source/XCDependencyGraph.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -41,6 +50,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		10A3E2831ED22FFB00697E4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10A3E28E1ED2304800697E4A /* DevToolsCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -48,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				10F2526D1ECC04CB00B8E5F9 /* Source */,
+				10A3E2871ED22FFB00697E4A /* UnitTests */,
 				1076BF9E1ECAA4B5002B730C /* Products */,
 				1076BFA71ECAA506002B730C /* Frameworks */,
 			);
@@ -57,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				1076BF9D1ECAA4B5002B730C /* XCCompilationDB */,
+				10A3E2861ED22FFB00697E4A /* UnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -71,11 +90,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		10A3E2871ED22FFB00697E4A /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				10A3E2881ED22FFB00697E4A /* UnitTests.mm */,
+				10A3E28A1ED22FFB00697E4A /* Info.plist */,
+			);
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
 		10F2526D1ECC04CB00B8E5F9 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				10F2526A1ECC04C500B8E5F9 /* main.m */,
+				10F2526A1ECC04C500B8E5F9 /* main.mm */,
 				10F2526B1ECC04C500B8E5F9 /* XCDependencyGraph.h */,
+				10A3E28F1ED230D800697E4A /* CompilationDatabase.h */,
+				10A3E2901ED230D800697E4A /* CompilationDatabase.mm */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -100,6 +130,23 @@
 			productReference = 1076BF9D1ECAA4B5002B730C /* XCCompilationDB */;
 			productType = "com.apple.product-type.tool";
 		};
+		10A3E2851ED22FFB00697E4A /* UnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 10A3E28D1ED22FFB00697E4A /* Build configuration list for PBXNativeTarget "UnitTests" */;
+			buildPhases = (
+				10A3E2821ED22FFB00697E4A /* Sources */,
+				10A3E2831ED22FFB00697E4A /* Frameworks */,
+				10A3E2841ED22FFB00697E4A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UnitTests;
+			productName = UnitTests;
+			productReference = 10A3E2861ED22FFB00697E4A /* UnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -110,6 +157,10 @@
 				ORGANIZATIONNAME = SwiftySwiftVim;
 				TargetAttributes = {
 					1076BF9C1ECAA4B5002B730C = {
+						CreatedOnToolsVersion = 8.3.1;
+						ProvisioningStyle = Automatic;
+					};
+					10A3E2851ED22FFB00697E4A = {
 						CreatedOnToolsVersion = 8.3.1;
 						ProvisioningStyle = Automatic;
 					};
@@ -128,16 +179,37 @@
 			projectRoot = "";
 			targets = (
 				1076BF9C1ECAA4B5002B730C /* XcodeCompilationDatabase */,
+				10A3E2851ED22FFB00697E4A /* UnitTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		10A3E2841ED22FFB00697E4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1076BF991ECAA4B5002B730C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10F2526C1ECC04C500B8E5F9 /* main.m in Sources */,
+				10A3E2911ED230D800697E4A /* CompilationDatabase.mm in Sources */,
+				10F2526C1ECC04C500B8E5F9 /* main.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		10A3E2821ED22FFB00697E4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10A3E2891ED22FFB00697E4A /* UnitTests.mm in Sources */,
+				1008CE4C1ED23E0100F4BE23 /* CompilationDatabase.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +337,44 @@
 			};
 			name = Release;
 		};
+		10A3E28B1ED22FFB00697E4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/PlugIns/Xcode3Core.ideplugin/Contents/Frameworks/,
+					/Applications/Xcode.app/Contents/SharedFrameworks/,
+					/Applications/Xcode.app/Contents/Frameworks/,
+				);
+				INFOPLIST_FILE = UnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) /Applications/Xcode.app/Contents/PlugIns/Xcode3Core.ideplugin/Contents/Frameworks/ /Applications/Xcode.app/Contents/SharedFrameworks/ /Applications/Xcode.app/Contents/Frameworks/";
+				OTHER_CFLAGS = "-DSRCROOT=$SRCROOT";
+				PRODUCT_BUNDLE_IDENTIFIER = ssvim.UnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SRCROOT = "$(SRCROOT)";
+			};
+			name = Debug;
+		};
+		10A3E28C1ED22FFB00697E4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/PlugIns/Xcode3Core.ideplugin/Contents/Frameworks/,
+					/Applications/Xcode.app/Contents/SharedFrameworks/,
+					/Applications/Xcode.app/Contents/Frameworks/,
+				);
+				INFOPLIST_FILE = UnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) /Applications/Xcode.app/Contents/PlugIns/Xcode3Core.ideplugin/Contents/Frameworks/ /Applications/Xcode.app/Contents/SharedFrameworks/ /Applications/Xcode.app/Contents/Frameworks/";
+				OTHER_CFLAGS = "-DSRCROOT=$SRCROOT";
+				PRODUCT_BUNDLE_IDENTIFIER = ssvim.UnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SRCROOT = "$(SRCROOT)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -282,6 +392,15 @@
 			buildConfigurations = (
 				1076BFA51ECAA4B5002B730C /* Debug */,
 				1076BFA61ECAA4B5002B730C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		10A3E28D1ED22FFB00697E4A /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10A3E28B1ED22FFB00697E4A /* Debug */,
+				10A3E28C1ED22FFB00697E4A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
