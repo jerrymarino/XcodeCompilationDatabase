@@ -60,11 +60,25 @@ int main(int argc, const char * argv[]) {
             IDEActivityLogSection *log = [record activityLog];
             NSArray <IDEActivityLogSection *>*compileSections = [log subsections];
             for (IDEActivityLogSection *compileSection in compileSections) {
-                // Title @"Compile /Path/To/ViewController.swift"
                 NSString *detailedDesc = compileSection.commandDetailDescription;
-                NSString *sourceFile = [compileSection.title componentsSeparatedByString:@" "][1];
-                // Compiler invocation is 3rd
-                NSString *compilerInvocation = [detailedDesc componentsSeparatedByString:@"\n"][2];
+                NSArray *descLines = [detailedDesc componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+                
+                // Get the source file
+                // CompileSwift config arch /Absolute/Path/To/File.swift
+                NSString *commandDesc = descLines[0];
+                const char* commandDescCharacters = [commandDesc UTF8String];
+                NSInteger filePathOffset = NSNotFound;
+                for (NSUInteger i = 0; i < commandDesc.length; i++) {
+                    if (commandDescCharacters[i] == '/') {
+                        filePathOffset = i;
+                        break;
+                    }
+                }
+                assert(filePathOffset != NSNotFound);
+                NSString *sourceFile = [commandDesc substringWithRange:NSMakeRange(filePathOffset, commandDesc.length - filePathOffset)];
+                
+                // Get the compiler invocation from the description
+                NSString *compilerInvocation = descLines[2];
                 [compDB addObject:@{
                                     @"file" : sourceFile,
                                     @"command" : compilerInvocation,
