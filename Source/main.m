@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <objc/runtime.h>
 #import "XCDependencyGraph.h"
 
 // Generate Compile commands based on the XCDependencyGraph output.

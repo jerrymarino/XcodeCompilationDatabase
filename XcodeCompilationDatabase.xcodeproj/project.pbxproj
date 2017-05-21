@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		100878311ECBFF9900D6AEF3 /* DevToolsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 100878301ECBFF9900D6AEF3 /* DevToolsCore.framework */; };
-		10F2526C1ECC04C500B8E5F9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F2526A1ECC04C500B8E5F9 /* main.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		10F2526C1ECC04C500B8E5F9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F2526A1ECC04C500B8E5F9 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
