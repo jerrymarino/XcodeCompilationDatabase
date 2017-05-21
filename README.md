@@ -5,15 +5,14 @@ graph](http://jerrymarino.com/2017/05/16/reversing-xcodes-build-graph.html).
 It simply loads the build graph then writes out `compile_commands.json`.
 
 [Compilation
-Database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) is file
+Database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) is a file
 format for storing compile commands.
 
 Program language tooling needs a Compilation Databases as input in order to
-setup the compiler stack. The canonical uses of Comp DB’s are LibTooling and
-clang-c. I wrote this for
+setup the compiler stack; canonical uses are LibTooling and
+clang-c. I originally wrote this for
 [SwiftySwiftVim](https://github.com/jerrymarino/swiftyswiftvim), to generate
-compilation databases for basic Swift Xcode projects. The goal is it easy to
-integrate semantic tooling into Xcode projects.
+Compilation Databases for basic Swift Xcode projects. 
 
 It currently supports Swift Commands only.
 
