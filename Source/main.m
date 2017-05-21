@@ -17,7 +17,7 @@ int main(int argc, const char * argv[]) {
     if (args.count < 2) {
         printf("%s", [[@[
         @"Generate Compile commands based on the XCDependencyGraph output.",
-        @"Usage: [BuildRootURI]",
+        @"Usage: [BuildRootURI] -db_dir /Path/To/Write/compile_commands.json",
         @"BuildRootURI: ex:",
         @"__DERIVED_DATA/MyProj-UID/Build/Intermediates/MyProj.build/Debug/MyTarget.build/",
         @"\0"
@@ -97,7 +97,9 @@ int main(int argc, const char * argv[]) {
     // Write the Comp DB in the current directory with the cargo cult naming convention.
     // This isn't in the spec, but CMake uses it.
     NSString *cargoCultDBName = @"/compile_commands.json";
-    NSString *outFile = [[[NSFileManager defaultManager] currentDirectoryPath] stringByAppendingString:cargoCultDBName];
+    // Use the db_dir option if available
+    NSString *outDir = [[NSUserDefaults standardUserDefaults] valueForKey:@"db_dir"] ?: [[NSFileManager defaultManager] currentDirectoryPath];
+    NSString *outFile = [outDir stringByAppendingString:cargoCultDBName];
     NSError *writeError;
     [jsonString writeToFile:outFile atomically:NO encoding:NSUTF8StringEncoding error:&writeError];
     return writeError != nil;
