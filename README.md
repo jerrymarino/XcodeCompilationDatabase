@@ -1,18 +1,23 @@
 # Xcode Compilation Database
 
-This program generate a compilation database based on Xcode's build graph.
+This program generates a compilation database based on [Xcode's build
+graph](http://jerrymarino.com/2017/05/16/reversing-xcodes-build-graph.html).
+It simply loads the build graph writes out `compile_commands.json`.
 
-It loads the data structure, `XCDependencyGraph`, from an Xcode build directory
-directory, and writes `compile_commands.json` to the working directory.
-
-The file format written is [Clang's Compilation
+CompilationDatabase is file format for compile commands [Clang's Compilation
 Database](https://clang.llvm.org/docs/JSONCompilationDatabase.html).
 
-It currently supports Swift Commands only: I wrote this project for
-[SwiftySwiftVim](https://github.com/jerrymarino/swiftyswiftvim), to generate
-compilation databases for basic Swift Xcode projects. 
+It currently supports Swift Commands only: 
 
-**It uses undocumented private frameworks in Xcode**
+Program language tooling needs a Compilation Databases as input in order to
+setup the compiler stack. The canonical uses of Comp DB’s are LibTooling and
+clang-c. I wrote this for
+[SwiftySwiftVim](https://github.com/jerrymarino/swiftyswiftvim), to generate
+compilation databases for basic Swift Xcode projects. The goal is it easy to
+integrate semantic tooling into Xcode projects.
+
+**Note: Tested on Xcode 8.3.1, it uses Xcode's undocumented APIs**
+
 
 ## Usage
 
@@ -22,7 +27,9 @@ First, build and install. Optionally, use the install script:
 ./install.sh
 ```
 
+It should be able to generate `compile_commands.json`.
 ```
+# Usage: [BuildRootURI] -db_dir /Path/To/Write/compile_commands.json
 XCCompilationDB __DERIVED_DATA/MyProj-UID/Build/Intermediates/MyProj.build/Debug/MyTarget.build/
 ```
 This directory is the directory containing a `dpgh` file ( Dependency Graph )
@@ -54,6 +61,5 @@ cleans.*
 
 ## Alternatives
 
-- XCPretty can generate a Comp DB for clang. Eventually, I hope it will for
-  swift too.
+- XCPretty can generate a Comp DB for clang. Eventually, it may for swift too.
 
