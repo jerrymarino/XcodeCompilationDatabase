@@ -2,7 +2,7 @@
 //  CompilationDatabase.m
 //  XcodeCompilationDatabase
 //
-//  Created by April Marino on 5/21/17.
+//  Created by Jerry Marino on 5/21/17.
 //  Copyright © 2017 SwiftySwiftVim. All rights reserved.
 //
 
@@ -126,13 +126,13 @@ static NSArray *EntriesForCompileCRecord(XCDependencyCommandInvocationRecord *re
 }
 
 // Xcode runs SwiftC which controls swift compilation.
-NSArray *EntriesForSwiftCRecord(XCDependencyCommandInvocationRecord *record) {
+static NSArray *EntriesForSwiftCRecord(XCDependencyCommandInvocationRecord *record) {
     NSMutableArray *entries = [NSMutableArray array];
     // Get the directoy from swiftInvocation
     // Usually this is last in the form of:
     // -working-directory/Path/ToRoot/
     NSArray *swiftCInvocation = record.commandLineArguments;
-    NSString *workingDir = nil;
+    NSString *workingDir;
     for (NSString *arg in swiftCInvocation.reverseObjectEnumerator) {
         if ([arg hasPrefix:@"-working-directory"]) {
             workingDir = [arg stringByReplacingOccurrencesOfString:@"-working-directory" withString:@""];

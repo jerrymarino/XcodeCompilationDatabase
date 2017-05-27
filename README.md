@@ -15,9 +15,10 @@ The program is fast enough to run as part of the build pipeline. This is a
 requirement for swift projects, because, the (implicit) file dependency graph
 changes a lot.
 
-I originally wrote this for
-[SwiftySwiftVim](https://github.com/jerrymarino/swiftyswiftvim), to
-generate Compilation Databases for Swift and setup YouCompleteMe.
+I started this as an accompanying project to
+[SwiftySwiftVim](https://github.com/jerrymarino/swiftyswiftvim), to generate
+Compilation Databases for Swift. Until now, there was no way to generate a
+Compilation Database for swift.
 
 ### Features
 
@@ -60,7 +61,8 @@ cleans.*
 ![whatisapostaction](https://cloud.githubusercontent.com/assets/1245820/26285776/0387c780-3e0b-11e7-9f9f-bb8bba12e3d8.png)
 
 
-## Alternatives
+## Alternatives without Swift support
 
 - XCPretty can generate a Comp DB for clang. Eventually, it may for swift too.
+- See the other several Compilation Databases implementations on the internet.
 

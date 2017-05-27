@@ -2,7 +2,7 @@
 //  UnitTests.m
 //  UnitTests
 //
-//  Created by April Marino on 5/21/17.
+//  Created by Jerry Marino on 5/21/17.
 //  Copyright © 2017 SwiftySwiftVim. All rights reserved.
 //
 
