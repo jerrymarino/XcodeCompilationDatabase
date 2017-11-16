@@ -88,18 +88,21 @@ static NSString *SwiftFileInSwiftInvocationRecord(NSString *invocation)
 {
     // 1) Find the object file we are compiling.
     // 2) Lookup the path of the object file.
-    // Assume that object files correspond to .swift files ( which they do in Xcodebuild )
+    // Assume that object files correspond to .swift files
+    // Typically the object file is at the end, and the corresponding file is at the beginning.
     auto arguments = shlex(std::string([invocation UTF8String]));
-    std::string last = arguments.at(arguments.size() - 1);
-    auto components = split(last, '/');
-    auto objectName = split(components.at(components.size() - 1), '.').at(0);
-    auto swiftFile = objectName + std::string(".swift");
-    for (auto &arg : arguments) {
-        if (ends_with(arg, swiftFile)) {
-            return [NSString stringWithUTF8String:arg.c_str()];
+    for (auto argIt = arguments.begin(); argIt != arguments.end(); ++argIt) {
+        auto components = split(*argIt, '/');
+        if (ends_with(*argIt, std::string(".o"))) {
+            auto objectName = split(components.at(components.size() - 1), '.').at(0);
+            auto objectFileName = objectName + std::string(".swift");
+            for (auto &arg : arguments) {
+                if (ends_with(arg, objectFileName)) {
+                    return [NSString stringWithUTF8String:arg.c_str()];
+                }
+            }
         }
     }
-    
     return nil;
 }
 
