@@ -116,6 +116,16 @@ static NSArray *EntriesForCompileCRecord(XCDependencyCommandInvocationRecord *re
             *stop = YES;
         }
     }];
+    
+    // quick-and-dirty shell-escaping spaces in filenames.
+    // Should probably also escape other characters.
+    NSMutableArray* escapedCLIArgs = [NSMutableArray arrayWithCapacity:CLIArgs.count];
+    for(NSString* arg in CLIArgs)
+    {
+        NSString* escapedArg = [arg stringByReplacingOccurrencesOfString:@" " withString:@"\\ "];
+        [escapedCLIArgs addObject:escapedArg];
+    }
+    CLIArgs = [escapedCLIArgs copy];
 
     // This is malformed, but be safe.
     if (!fileName) {
