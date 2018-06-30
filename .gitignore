@@ -3,3 +3,4 @@
 *xcworkspacedata
 build
 compile_commands.json
+.build
