@@ -25,6 +25,7 @@ public func shlex(_ input: String) -> [String] {
             escape = false;
             accumulator += str
         } else if str == "\\" {
+            accumulator += str
             escape = true;
         } else if (quote == unitQuote && str == singleQuote) ||
                    (quote == unitQuote && str == unitQuote) {
